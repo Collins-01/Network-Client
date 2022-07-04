@@ -19,10 +19,10 @@ class NetworkClient with NetworkClientMixin {
     _enableLogging = enableLogging;
   }
 
-  final Dio _dio = createDio();
+  final Dio _dio = _createDio();
 
   ///Initialises the Dio Variable
-  static Dio createDio() {
+  static Dio _createDio() {
     var dio = Dio(
       BaseOptions(
         baseUrl: _baseURL,
