@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import 'package:network_client/src/exceptions/exceptions.dart';
 import 'package:network_client/src/mixins/mixins.dart';
+import 'package:network_client/src/network_client_interceptors/network_client_interceptors.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class NetworkClient with NetworkClientMixin {
@@ -10,9 +11,12 @@ class NetworkClient with NetworkClientMixin {
   factory NetworkClient() => _instance;
   static String _baseURL = '';
   static Map<String, dynamic>? _headers;
-  static init(String url, {Map<String, dynamic>? headers}) {
+  static bool _enableLogging = false;
+  static init(String url,
+      {Map<String, dynamic>? headers, bool enableLogging = false}) {
     _baseURL = url;
     _headers = headers;
+    _enableLogging = enableLogging;
   }
 
   final Dio _dio = createDio();
@@ -29,17 +33,20 @@ class NetworkClient with NetworkClientMixin {
     );
 
     /// Adds our Custom Interceptos to the DIO Interceptors
-    // dio.interceptors.add(NetworkCoreInterceptors(dio));
-    dio.interceptors.add(
-      PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          responseBody: true,
-          responseHeader: false,
-          error: true,
-          compact: true,
-          maxWidth: 90),
-    );
+    dio.interceptors.add(NetworkInterceptors(dio));
+    if (_enableLogging) {
+      dio.interceptors.add(
+        PrettyDioLogger(
+            requestHeader: true,
+            requestBody: true,
+            responseBody: true,
+            responseHeader: false,
+            error: true,
+            compact: true,
+            maxWidth: 90),
+      );
+    }
+
     return dio;
   }
 

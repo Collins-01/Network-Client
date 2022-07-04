@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:network_client/src/exceptions/exceptions.dart';
 
-class NetworkCoreInterceptors extends Interceptor {
+class NetworkInterceptors extends Interceptor {
   final Dio dio;
   String? token;
-  NetworkCoreInterceptors(this.dio);
+  NetworkInterceptors(this.dio);
   @override
   Future<dynamic> onError(DioError err, ErrorInterceptorHandler handler) async {
     switch (err.type) {
