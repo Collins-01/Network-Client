@@ -1,10 +1,12 @@
+import 'package:network_client/src/exceptions/exceptions.dart';
+
 abstract class Failure {
   // * Exposes the Error title, and message
   String get title;
   String get message;
 
-  // bool get isInternetConnectionError =>
-  //     runtimeType is NoInternetConnectionException;
+  bool get isInternetConnectionError =>
+      runtimeType is NoInternetConnectionException;
 
   /// * Decodes the Error from the server, and casts it to a nullable string
   String? getError(error) {
