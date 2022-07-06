@@ -14,7 +14,7 @@ and the Flutter guide for
 ## Getting started
 
 TODO: Copy the Github Url, and add to your pubspec.yaml.
-[network_client](https://github.com/collins-01/network_client). 
+[network_client](https://github.com/Collins-01/Network-Client). 
 
  ```dart
 dependencies:
@@ -22,7 +22,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   network_client:
-    git: https://github.com/collins-01/network_client
+    git: https://github.com/Collins-01/Network-Client
 ```
 
 Run the `flutter pub get` command
