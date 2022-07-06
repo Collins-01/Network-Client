@@ -96,6 +96,9 @@ The final usage in your viewModels, or in your Bloc file.
   }
 }
 ```
+[Here is an example for usage with BLoCs or Cubits](https://github.com/Collins-01/Weather_App_Flutter.git). 
+
+<!-- https://github.com/Collins-01/Weather_App_Flutter.git -->
 
 <!-- 
 ## Additional information
