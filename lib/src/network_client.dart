@@ -12,11 +12,23 @@ class NetworkClient with NetworkClientMixin {
   static String _baseURL = '';
   static Map<String, dynamic>? _headers;
   static bool _enableLogging = false;
-  static init(String url,
-      {Map<String, dynamic>? headers, bool enableLogging = false}) {
+  static int _receiveTimeout = 40000;
+  static int _connectTimeout = 40000;
+  static int _sendTimeout = 60000;
+  static init(
+    String url, {
+    Map<String, dynamic>? headers,
+    bool enableLogging = false,
+    int receiveTimeout = 40000,
+    int connectTimeout = 40000,
+    int sendTimeout = 60000,
+  }) {
     _baseURL = url;
     _headers = headers;
     _enableLogging = enableLogging;
+    _receiveTimeout = receiveTimeout;
+    _connectTimeout = connectTimeout;
+    _sendTimeout = sendTimeout;
   }
 
   final Dio _dio = _createDio();
@@ -26,9 +38,9 @@ class NetworkClient with NetworkClientMixin {
     var dio = Dio(
       BaseOptions(
         baseUrl: _baseURL,
-        receiveTimeout: 40000, // 15 seconds
-        connectTimeout: 40000,
-        sendTimeout: 60000,
+        receiveTimeout: _receiveTimeout, // 15 seconds
+        connectTimeout: _connectTimeout,
+        sendTimeout: _sendTimeout,
       ),
     );
 

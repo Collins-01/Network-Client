@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 mixin NetworkClientMixin {
   void checkIfURLInitialised(String url) {
     if (url.isEmpty) {
