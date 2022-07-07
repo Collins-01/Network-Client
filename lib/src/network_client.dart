@@ -5,6 +5,19 @@ import 'package:network_client/src/mixins/mixins.dart';
 import 'package:network_client/src/network_client_interceptors/network_client_interceptors.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+/*
+Error Response:
+
+ {
+  "errorMessages": [
+    "string"
+  ],
+  "status": 100,
+  "isSuccess": true
+}
+
+*/
+
 class NetworkClient with NetworkClientMixin {
   NetworkClient._();
   static final NetworkClient _instance = NetworkClient._();
@@ -15,6 +28,7 @@ class NetworkClient with NetworkClientMixin {
   static int _receiveTimeout = 40000;
   static int _connectTimeout = 40000;
   static int _sendTimeout = 60000;
+  static Map<String, dynamic> _errorObject = {};
   static init(
     String url, {
     Map<String, dynamic>? headers,
@@ -22,6 +36,7 @@ class NetworkClient with NetworkClientMixin {
     int receiveTimeout = 40000,
     int connectTimeout = 40000,
     int sendTimeout = 60000,
+    Map<String, dynamic> errorObject = const {},
   }) {
     _baseURL = url;
     _headers = headers;
@@ -29,6 +44,9 @@ class NetworkClient with NetworkClientMixin {
     _receiveTimeout = receiveTimeout;
     _connectTimeout = connectTimeout;
     _sendTimeout = sendTimeout;
+    if (errorObject.isNotEmpty) {
+      _errorObject = errorObject;
+    }
   }
 
   final Dio _dio = _createDio();
@@ -45,7 +63,10 @@ class NetworkClient with NetworkClientMixin {
     );
 
     /// Adds our Custom Interceptos to the DIO Interceptors
-    dio.interceptors.add(NetworkInterceptors(dio));
+    dio.interceptors.add(NetworkInterceptors(
+      dio,
+      errorObject: _errorObject,
+    ));
     if (_enableLogging) {
       dio.interceptors.add(
         PrettyDioLogger(

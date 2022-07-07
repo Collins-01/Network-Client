@@ -16,7 +16,9 @@ class UserDefinedExceptions extends Failure {
 class BadRequestException extends DioError with Failure {
   final RequestOptions request;
   final Response? serverResponse;
-  BadRequestException(this.request, [this.serverResponse])
+  final Map<String, dynamic> errorObject;
+  BadRequestException(this.request,
+      [this.serverResponse, this.errorObject = const {}])
       : super(requestOptions: request, response: serverResponse);
 
   @override
@@ -28,8 +30,16 @@ class BadRequestException extends DioError with Failure {
     if (serverResponse == null) {
       return "An error occured, please try again. ";
     }
-    return getError(serverResponse?.data['errorMessages']) ??
-        "An error occured, please try again.";
+
+    if (errorObject.isNotEmpty) {
+      final key = errorObject.keys.first;
+
+      if (getError(serverResponse?.data[key]) == null) {
+        return "An error occured, please try again.";
+      }
+      return getError(serverResponse?.data[key])!;
+    }
+    return "An error occured, please try again.";
   }
 
   @override
