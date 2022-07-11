@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import './failure.dart';
 
+/// User defined Exceptions
 class UserDefinedExceptions extends Failure {
   final String _title;
   final String _message;
