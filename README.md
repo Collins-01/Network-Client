@@ -1,7 +1,7 @@
 
 ## Getting started
 
-`Inspired by my boss 🤲 `EhisEA` `
+`Inspired by my boss 🤲 ` [EhisEA](https://github.com/EhisEA)
  
 
 TODO: Copy the Github Url, and add to your pubspec.yaml.
