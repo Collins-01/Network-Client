@@ -16,6 +16,7 @@ class NetworkInterceptors extends Interceptor {
         break;
       case DioErrorType.response:
         if (err.response != null) {
+          ///* Checking for Status Codes.
           switch (err.response?.statusCode) {
             case 400:
               err = BadRequestException(err.requestOptions, err.response);
@@ -86,11 +87,7 @@ class NetworkInterceptors extends Interceptor {
         case 400:
           throw BadRequestException(requestOptions, response);
         case 401:
-          throw UserDefinedExceptions(
-            "Access Denied",
-            "Please login and try again.",
-            response?.statusCode,
-          );
+          throw UnAuthorizedException(requestOptions);
         case 404:
           throw NotFoundException(requestOptions);
         case 409:

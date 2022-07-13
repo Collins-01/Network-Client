@@ -6,7 +6,7 @@ class CancelRequestException extends DioError with Failure {
   CancelRequestException(this.requestOptions)
       : super(requestOptions: requestOptions);
   @override
-  String get message => "Request was cancelled, please try again";
+  String get message => "Request was cancelled, please try again.";
 
   @override
   int get statusCode => 000;
