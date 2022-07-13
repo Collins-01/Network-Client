@@ -1,2 +1,2 @@
 export './failure.dart';
-export './network_client_exceptions.dart';
+export './exception_types/exception_types.dart';
