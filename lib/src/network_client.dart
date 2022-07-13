@@ -109,7 +109,7 @@ class NetworkClient with NetworkClientMixin {
     }
   }
 
-  ///POST
+  ///[POST] sends a post request to the server.
   Future<dynamic> post(
     /// the api route without the base url
     String uri, {

@@ -4,6 +4,7 @@ abstract class Failure {
   ///Exposes the Error title, and message
   String get title;
   String get message;
+  int get statusCode;
 
   /// Returns  true if error is a network connection problem
   bool get isInternetConnectionError =>

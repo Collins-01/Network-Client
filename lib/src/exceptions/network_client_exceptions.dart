@@ -5,12 +5,16 @@ import './failure.dart';
 class UserDefinedExceptions extends Failure {
   final String _title;
   final String _message;
-  UserDefinedExceptions(this._title, this._message);
+  final int? _code;
+  UserDefinedExceptions(this._title, this._message, this._code);
   @override
   String get message => _message;
 
   @override
   String get title => _title;
+
+  @override
+  int get statusCode => _code ?? 000;
 }
 
 /// 400 Response
@@ -47,6 +51,9 @@ class BadRequestException extends DioError with Failure {
   String toString() {
     return "Error was:\nTitle: $title\nMessage: $message ";
   }
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
 }
 
 ///500 Response
@@ -65,6 +72,9 @@ class InternalServerErrorException extends DioError with Failure {
   String get title => "Server Error";
   @override
   String get message => "An Unknown error occcured, please try again later";
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
 }
 
 ///409
@@ -90,6 +100,9 @@ class ConflictException extends DioError with Failure {
 
   @override
   String get title => "Conflict Error";
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
 }
 
 ///401
@@ -118,6 +131,9 @@ class UnAuthorizedException extends DioError with Failure {
 
   @override
   String get title => "Access denied.";
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
   // String get title => serverResponse?.data?["message"] ?? "Access denied.";
 }
 
@@ -152,6 +168,9 @@ class NotFoundException extends DioError with Failure {
     // }
     return "Not Found";
   }
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
 }
 
 ///No Internet Connection
@@ -168,6 +187,9 @@ class NoInternetConnectionException extends DioError with Failure {
 
   @override
   String get title => "No Network";
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
 }
 
 ///Time Out Exception [When there is a connection timeou with the request]
@@ -184,6 +206,9 @@ class DeadlineExceededException extends DioError with Failure {
 
   @override
   String get title => "Network error";
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
 }
 
 /// errors sent back by the server in json
@@ -210,22 +235,9 @@ class ServerCommunicationException extends DioError with Failure {
 
   @override
   String get title => "Server Error ";
-}
-
-class TestException extends DioError with Failure {
-  final Response? serverResponse;
-  final RequestOptions requestOptions;
-  TestException(this.requestOptions, [this.serverResponse])
-      : super(
-          requestOptions: requestOptions,
-          response: serverResponse,
-        );
 
   @override
-  String get message => "An unknown error occured, please try again.";
-
-  @override
-  String get title => "Network Error";
+  int get statusCode => response?.statusCode ?? 000;
 }
 
 class RequestUnknownExcpetion extends DioError with Failure {
@@ -242,4 +254,7 @@ class RequestUnknownExcpetion extends DioError with Failure {
 
   @override
   String get title => "Unkown Error";
+
+  @override
+  int get statusCode => response?.statusCode ?? 000;
 }

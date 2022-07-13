@@ -86,7 +86,10 @@ class NetworkInterceptors extends Interceptor {
           throw BadRequestException(requestOptions, response);
         case 401:
           throw UserDefinedExceptions(
-              "Access Denied", "Please login and try again.");
+            "Access Denied",
+            "Please login and try again.",
+            response?.statusCode,
+          );
         case 404:
           throw NotFoundException(requestOptions);
         case 409:
