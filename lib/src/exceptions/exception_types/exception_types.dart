@@ -9,3 +9,4 @@ export './request_unknown_exception.dart';
 export './unauthorized_exception.dart';
 export './no_internet_connection_exception.dart';
 export './server_communication_error.dart';
+export './cancel_request_exception.dart';

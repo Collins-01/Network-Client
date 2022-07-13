@@ -48,6 +48,7 @@ class NetworkInterceptors extends Interceptor {
         }
         break;
       case DioErrorType.cancel:
+        err = CancelRequestException(err.requestOptions);
         break;
       case DioErrorType.other:
         err = NoInternetConnectionException(err.requestOptions);
