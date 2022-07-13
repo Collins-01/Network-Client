@@ -3,6 +3,8 @@ import 'package:network_client/network_client.dart';
 
 void main() {
   /// Token can be fetched from your cache or sustained from your AuthService
+  WidgetsFlutterBinding.ensureInitialized();
+
   String token = '';
 
   NetworkClient.init(

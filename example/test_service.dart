@@ -21,6 +21,7 @@ class MYViewModel {
     } on Failure catch (e) {
       print(e.message);
       print(e.title);
+      print(e.statusCode);
     }
   }
 }

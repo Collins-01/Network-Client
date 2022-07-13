@@ -23,6 +23,7 @@ class NetworkClient with NetworkClientMixin {
   static final NetworkClient _instance = NetworkClient._();
   factory NetworkClient() => _instance;
   static String _baseURL = '';
+
   static Map<String, dynamic>? _headers;
   static bool _enableLogging = false;
   static int _receiveTimeout = 40000;
@@ -89,6 +90,7 @@ class NetworkClient with NetworkClientMixin {
     String uri, {
     Map<String, dynamic> queryParameters = const {},
     // Options options,
+    Map<String, dynamic>? requestHeaders,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) async {
@@ -100,7 +102,9 @@ class NetworkClient with NetworkClientMixin {
         queryParameters: queryParameters,
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
-        options: Options(headers: _headers),
+        options: Options(
+          headers: requestHeaders ?? _headers,
+        ),
       );
       // checkRequest(response);
       return response.data;
@@ -120,6 +124,7 @@ class NetworkClient with NetworkClientMixin {
     /// https://she.com/getPeople?a=yes
     Map<String, dynamic> queryParameters = const {},
     Object? body,
+    Map<String, dynamic>? requestHeaders,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) async {
@@ -132,7 +137,7 @@ class NetworkClient with NetworkClientMixin {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
         options: Options(
-          headers: _headers,
+          headers: requestHeaders ?? _headers,
         ),
       );
       // checkRequest(response);
@@ -154,6 +159,7 @@ class NetworkClient with NetworkClientMixin {
     Object body = const {},
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
+    Map<String, dynamic>? requestHeaders,
   }) async {
     checkIfURLInitialised(_baseURL);
     try {
@@ -164,7 +170,7 @@ class NetworkClient with NetworkClientMixin {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
         options: Options(
-          headers: _headers,
+          headers: requestHeaders ?? _headers,
         ),
       );
       // checkRequest(response);
@@ -186,6 +192,7 @@ class NetworkClient with NetworkClientMixin {
     Object body = const {},
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
+    Map<String, dynamic>? requestHeaders,
   }) async {
     checkIfURLInitialised(_baseURL);
     try {
@@ -196,7 +203,7 @@ class NetworkClient with NetworkClientMixin {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
         options: Options(
-          headers: _headers,
+          headers: requestHeaders ?? _headers,
         ),
       );
       // checkRequest(response);
@@ -211,6 +218,7 @@ class NetworkClient with NetworkClientMixin {
     ///
     String uri, {
     Map<String, dynamic> queryParameters = const {},
+    Map<String, dynamic>? requestHeaders,
     // Options options,
     CancelToken? cancelToken,
   }) async {
@@ -221,7 +229,7 @@ class NetworkClient with NetworkClientMixin {
         queryParameters: queryParameters,
         cancelToken: cancelToken,
         options: Options(
-          headers: _headers,
+          headers: requestHeaders ?? _headers,
         ),
       );
       return response.data;
