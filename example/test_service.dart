@@ -8,6 +8,10 @@ class TestService {
       //Decode and use respoonse here
     } on Failure {
       rethrow;
+    } on Exception {
+      //data
+      //FormatException
+      rethrow;
     }
   }
 }

@@ -71,22 +71,23 @@ class NetworkClient with NetworkClientMixin {
     if (_enableLogging) {
       dio.interceptors.add(
         PrettyDioLogger(
-            requestHeader: true,
-            requestBody: true,
-            responseBody: true,
-            responseHeader: false,
-            error: true,
-            compact: true,
-            maxWidth: 90),
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: false,
+          error: true,
+          compact: true,
+          maxWidth: 90,
+        ),
       );
     }
 
     return dio;
   }
 
+  ///Makes a [GET] request and returns data of type[T]
   Future<T> get<T>(
     /// the api route path without the base url
-    ///
     String uri, {
     Map<String, dynamic> queryParameters = const {},
     // Options options,
