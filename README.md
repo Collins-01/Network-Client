@@ -47,6 +47,7 @@ Run the `flutter pub get` command
     connectTimeout: 50000,
     enableLogging: true,
     headers: {
+      
       "Authorization": "Bearer $token",
     },
     receiveTimeout: 60000,

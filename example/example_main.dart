@@ -11,6 +11,9 @@ void main() {
     'my url',
     connectTimeout: 50000,
     enableLogging: true,
+    errorObject: {
+      'message': ['A is not a number', '1 is not an alphabet']
+    },
     headers: {
       "Authorization": "Bearer $token",
     },
@@ -18,3 +21,12 @@ void main() {
     sendTimeout: 40000,
   );
 }
+
+var e = {
+  'status': 'Can be anything',
+  'error': [] // can be array, map, , int, double , or string
+};
+/*
+if the error key is specified, it will be easy to get the error message. 
+  the key above id  `error`
+*/
