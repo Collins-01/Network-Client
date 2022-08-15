@@ -238,4 +238,29 @@ class NetworkClient with NetworkClientMixin {
       rethrow;
     }
   }
+
+  /// Downloads a file to the device.
+  /// Takes in `uri` to the file of type [String], and the download `path` of type [Sting]
+  Future<T> download<T>(
+    /// the api route path without the base url
+    ///
+    String uri,
+    String path, {
+    Options? options,
+    // Options options,
+    CancelToken? cancelToken,
+  }) async {
+    // checkIfURLInitialised(_baseURL);
+    try {
+      Response response = await _dio.download(
+        uri,
+        path,
+        cancelToken: cancelToken,
+        options: options,
+      );
+      return response.data;
+    } on Failure {
+      rethrow;
+    }
+  }
 }
